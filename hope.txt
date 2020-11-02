@@ -1,0 +1,105 @@
+import React, { Component } from "react";
+import axios from 'axios';
+import * as fs from 'fs'
+
+
+
+class Scanning extends Component {constructor() {
+    super();
+    this.state = {
+        bob: '', age: '' , copySuccess: false , apiResponse: "" 
+    };
+  }
+
+  callAPI() {
+    fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+  }
+  
+  componentWillMount() {
+    this.callAPI();
+  }
+    
+  
+
+  showFile = () => {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+         var preview = document.getElementById('show-text');
+         var file = document.querySelector('input[type=file]').files[0];
+         var reader = new FileReader()
+         var str = preview;
+         var textFile = /text.*/;
+         var value = file;
+         var name = file
+
+
+         
+         
+         const el = this.textArea
+         el.select()
+         document.execCommand("copy")
+         this.setState({copySuccess: true})
+          
+
+         if (file.type.match(textFile)) {
+            reader.onload = function (event) {
+               preview.innerHTML = event.target.result;
+            }
+            
+          
+            
+         } else {
+            preview.innerHTML = "<span class='error'>It doesn't seem to be a text file!</span>";
+         }
+         
+         var str = "Hello world, welcome to the universe.";
+         var n = str.includes("bob");
+          
+      
+
+         reader.readAsText(file);
+
+   } else {
+      alert("Your browser is too old to support HTML5 File API");
+   }
+  }
+  handleNameOnChange(e) {
+    this.setState({
+      bob: e.target.value
+    });
+  }
+  
+  render() {
+    return (
+      <div>
+        <form className="donationForm" onSubmit={this.handleSubmit}>
+
+
+
+
+
+          
+        </form>
+
+
+        </div>
+    
+
+  
+
+  
+
+
+
+  );
+
+
+    }
+};
+
+
+
+
+export default Scanning;
+        
