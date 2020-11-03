@@ -8,74 +8,34 @@ class Scanning extends Component {
     super(props);
 
 
-let wordsarray = [];
-let fileUploaded = false;
-  
-  
-function handelfiles(files){
-if(window.FileReader){
-  getAstext(files[0]);
-  fileUploaded = true;
-} else {
-  alert('FileReader not supported in browser');
-}
-}
-
-function getAstext(fileToRead){
-
-let reader = new FileReader();
-
-reader.onload = loadHandeler;
-reader.onerror = errorHandeler;
-
-}
-
-function loadHandeler(event){
- let txt = event.target.result;
- processData(txt);
-}
-
-
-function errorHandeler(evt){
-  if(evt.target.error.name ==  " Not Readableerror"){
-  alert('Can not read file');
-  }
-}
-
-
-function owen(files){
-  if(window.FileReader){
-    getAstext(files[0]);
-    fileUploaded = true;
-  } else {
-    alert('FileReader not supported in browser');
-  }
+this.state = {
+      name: "React"
+    };
   }
 
-function processData(txt){
-  let alltextLines = txt.split(/\r\n|\n/);
+  showFile = () => {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      var preview = document.getElementById("show-text");
+      var file = document.querySelector("input[type=file]").files[0];
+      var reader = new FileReader();
+      var textFile = /text.*/;
+      var data = "";
+      if (file.type.match(textFile)) {
+        reader.onload = function(event) {
+          preview.innerHTML = event.target.result;
+        };
+      } else {
+        preview.innerHTML =
+          "<span class='error'>It doesn't seem to be a text file!</span>";
+      }
+      reader.readAsText(file) 
 
-  for (let i = 0; i < alltextLines.length; i++){
 
-    let row = alltextLines[i].split(',');
 
-    let col =[];
-
-    for (let j = 0; j < row.length; j++){
-      col.push(row[j])
+    } else {
+      alert("Your browser is too old to support HTML5 File API");
     }
-
-    wordsarray.push(col);
-    
-
-  }
-
-
-
-}
-
-
-}
+  };
 
 
   render() {
@@ -84,11 +44,8 @@ function processData(txt){
     return (
       
       <div>
-        <input type="file" accept=".txt" onChange={e => 
-            this.handelfiles(e.target.files[0])} />
-
-       <textarea type="file"  id= {wordsarray} />
-       
+        <input type="file" onChange={this.showFile} />
+        <div id="show-text">Choose text File</div>
       </div>
     );
   }
