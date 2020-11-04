@@ -22,7 +22,6 @@ this.state = {
       if (file.type.match(textFile)) {
         reader.onload = function(event) {
           preview.innerHTML = event.target.result;
-         // if [keyword == keywords];
         };
       } else {
         preview.innerHTML =

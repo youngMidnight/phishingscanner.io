@@ -78,8 +78,8 @@ const App = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Last name</label>
-                    <input type="text" className="form-control" placeholder="Last name" />
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Username" />
                 </div>
 
                 <div className="form-group">
@@ -94,7 +94,7 @@ const App = () => {
 
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <p className="forgot-password text-right">
-                    Already registered <a href="#">sign in?</a>
+                    Already registered <a href="#"></a>
                 </p>
             </form>
     </div>
